@@ -1,0 +1,25 @@
+GET https://fcnj6h.azurewebsites.net/api/nxfutil HTTP/1.1
+
+### bepridil
+
+POST https://fcnj6h.azurewebsites.net/api/nxfutil HTTP/1.1
+content-type: application/json
+
+{
+    "config_uri": "",
+    "pipeline_uri": "https://raw.githubusercontent.com/axgonz/azure-nextflow-cipa/main/nextflow/pipelines/cipa/pipeline.nf",
+    "parameters_uri": "https://raw.githubusercontent.com/axgonz/azure-nextflow-cipa/main/nextflow/pipelines/cipa/bepridil.json",
+    "auto_delete": true
+}
+
+### chlorpromazine
+
+POST https://fcnj6h.azurewebsites.net/api/nxfutil HTTP/1.1
+content-type: application/json
+
+{
+    "config_uri": "",
+    "pipeline_uri": "https://raw.githubusercontent.com/axgonz/azure-nextflow-cipa/main/nextflow/pipelines/cipa/pipeline.nf",
+    "parameters_uri": "https://raw.githubusercontent.com/axgonz/azure-nextflow-cipa/main/nextflow/pipelines/cipa/chlorpromazine.json",
+    "auto_delete": true
+}
