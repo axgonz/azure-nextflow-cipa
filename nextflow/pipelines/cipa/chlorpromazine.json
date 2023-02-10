@@ -1,0 +1,8 @@
+{
+    "runId": "123456",
+    "drugName": "chlorpromazine",
+    "numberOfSamples": 1,
+    "population": 80,
+    "accuracy": 0.001,
+    "cpusPerSample": 4
+}
