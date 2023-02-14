@@ -31,6 +31,5 @@ process parallel {
 }
 
 workflow {
-    Channel.from(0..(params.numberOfSamples-1)) | parallel | view
+    Channel.from((params.startSampleNumber)..(params.endSampleNumber)) | parallel | view
 }
-
