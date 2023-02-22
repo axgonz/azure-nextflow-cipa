@@ -63,7 +63,7 @@ workflow {
         if (params.startSampleNumber <= params.endSampleNumber) {
             if (params.startSampleNumber < 2000) {
                 def dir = prereq()
-                Channel.from(dir, (params.startSampleNumber)..(params.endSampleNumber)) | parallel | view
+                parallel(dir, Channel.from(params.startSampleNumber..params.endSampleNumber)) | view
             }
         }
     }
