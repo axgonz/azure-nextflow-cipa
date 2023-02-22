@@ -6,6 +6,10 @@
 
 GET https://{{az_funcName}}.azurewebsites.net/api/nxfutil HTTP/1.1
 
+###
+
+GET https://{{az_funcName}}.azurewebsites.net/api/nxfutil_status HTTP/1.1
+
 ### bepridil
 
 POST https://{{az_funcName}}.azurewebsites.net/api/nxfutil HTTP/1.1
