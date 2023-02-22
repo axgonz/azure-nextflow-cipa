@@ -1,8 +1,8 @@
 {
     "runId": "123456",
     "drugName": "bepridil",
-    "startSampleNumber": 0,
-    "endSampleNumber": 0,
+    "startSampleNumber": 1,
+    "endSampleNumber": 2,
     "population": 80,
     "accuracy": 0.001,
     "cpusPerSample": 32
