@@ -54,8 +54,8 @@ process parallel {
             "results/${params.drugName}/hERG_fitting.R_${sample}.log"
 
         mkdir -p "${params.azureFileShare}/${params.runId}/${params.drugName}/boot"
-        cp -rv "results/${params.drugName}"/boot/* "${params.azureFileShare}/${params.runId}/${params.drugName}/boot"/
-        cp -v "results/${params.drugName}"/hERG_fitting.R_${sample}.log" "${params.azureFileShare}/${params.runId}/${params.drugName}/hERG_fitting.R_${sample}.log"
+        cp -rv "results/${params.drugName}/boot"/* "${params.azureFileShare}/${params.runId}/${params.drugName}/boot"/
+        cp -v "results/${params.drugName}/hERG_fitting.R_${sample}.log" "${params.azureFileShare}/${params.runId}/${params.drugName}/hERG_fitting.R_${sample}.log"
         """
 }
 
