@@ -5,5 +5,5 @@
     "endSampleNumber": 0,
     "population": 80,
     "accuracy": 0.001,
-    "cpusPerSample": 8
+    "cpusPerSample": 32
 }
