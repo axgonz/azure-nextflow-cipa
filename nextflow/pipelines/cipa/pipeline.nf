@@ -5,7 +5,7 @@ nextflow.enable.dsl=2
 params.timestamp = '$(date +%Y%m%d_%H%M%S%Z)'
 
 process prereq {
-    queue 'cipa'
+    queue 'default'
     container "$params.azureRegistryServer/default/cipa:latest"
 
     output:
@@ -30,7 +30,7 @@ process prereq {
 
 process parallel {
     cpus "$params.cpusPerSample"
-    queue 'cipa'
+    queue 'default'
     container "$params.azureRegistryServer/default/cipa:latest"
   
     input:
