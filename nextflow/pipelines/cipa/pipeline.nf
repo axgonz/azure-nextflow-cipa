@@ -17,6 +17,7 @@ process prereq {
         cd /CiPA/hERG_fitting/
 
         rm -r "results/${params.drugName}"
+        mkdir -p "results/${params.drugName}"
 
         Rscript generate_bootstrap_samples.R -d $params.drugName >\
             "results/${params.drugName}/generate_bootstrap_samples.R.log"
