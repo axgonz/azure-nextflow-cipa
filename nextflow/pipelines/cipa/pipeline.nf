@@ -4,7 +4,7 @@ nextflow.enable.dsl=2
 
 params.timestamp = '$(date +%Y%m%d_%H%M%S%Z)'
 
-process prerequisites {
+process prerequisites  {
     cpus "$params.cpusPerSample"
     queue 'default'
     container "$params.azureRegistryServer/default/cipa:latest"
@@ -60,6 +60,20 @@ process parallel {
 }
 
 workflow {
-    def dir = prerequisites()
-    parallel(dir, Channel.from(params.startSampleNumber..params.endSampleNumber)) | view
+    // ToDo validate params.cpusPerSample is a prime factor of 40
+    
+    if (params.startSampleNumber == 0) {
+        if (params.endSampleNumber == 0) {
+            prerequisites()
+        }
+    }
+    
+    if (params.startSampleNumber > 0) {
+        if (params.startSampleNumber <= params.endSampleNumber) {
+            if (params.startSampleNumber < 2000) {
+                def dir = prerequisites ()
+                parallel(dir, Channel.from(params.startSampleNumber..params.endSampleNumber)) | view
+            }
+        }
+    }
 }
