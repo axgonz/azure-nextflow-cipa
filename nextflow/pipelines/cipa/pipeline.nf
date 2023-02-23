@@ -77,34 +77,31 @@ process err {
 }
 
 workflow {
-    // Validate cpusPerSample is a factor of 80
     def factorsOf80 = [0, 1, 2, 4, 5, 8, 10, 16, 20, 40, 80]
-    if (params.cpusPerSample > 0 && factorsOf80.contains(params.cpusPerSample % 80)) {
-    
-        // Allow sample 0 to be run independently
-        if (params.startSampleNumber == 0) {
-            if (params.endSampleNumber == 0) {
-                prerequisites()
-            }
-            else {
-                err("Invalid input: if startSampleNumber is 0 endSampleNumber needs to be 0.")
-            }
-        }
-        
-        // Make sure sample range is within bounds
-        if (params.startSampleNumber > 0) {
-            if (params.startSampleNumber <= params.endSampleNumber) {
-                if (params.endSampleNumber < 2000) {
-                    def dir = prerequisites ()
-                    parallel(dir, Channel.from(params.startSampleNumber..params.endSampleNumber)) | view
-                }
-                else {
-                    err("Invalid input: startSampleNumber needs to be <= endSampleNumber.")
-                }
-            }
-        }
+    if(params.cpusPerSample < 1) {
+        err("Invalid input: cpusPerSample must be => 1.")
     }
-    else {
-        err("Invalid input: cpusPerSample needs to be a factor of 80.")
+    if (factorsOf80.contains(params.cpusPerSample % 80)) {
+        err("Invalid input: cpusPerSample must be a factor of 80.")
+    }
+
+    // Allow sample 0 to be run independently
+    if (params.startSampleNumber == 0) {
+        if (params.endSampleNumber != 0) {
+            err("Invalid input: if startSampleNumber is 0 endSampleNumber must be 0.")
+        }
+        prerequisites()
+    }
+    
+    // Make sure sample range is within bounds
+    if (params.startSampleNumber > 0) {
+        if (params.endSampleNumber > 2000) {
+            err("Invalid input: endSampleNumber must be <= 2000.")
+        }
+        if (params.startSampleNumber > params.endSampleNumber) {
+            err("Invalid input: startSampleNumber must be <= endSampleNumber.")
+        }
+        def dir = prerequisites()
+        parallel(dir, Channel.from(params.startSampleNumber..params.endSampleNumber)) | view
     }
 }
