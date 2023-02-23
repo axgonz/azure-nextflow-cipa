@@ -50,7 +50,7 @@ process parallel {
         mkdir -p "results/${params.drugName}"
 
         pushd ${baseDir}
-        cp -v `find -maxdepth 1 -type f` /CiPA/hERG_fitting/results/${params.drugName}"/
+        cp -v `find -maxdepth 1 -type f` "/CiPA/hERG_fitting/results/${params.drugName}"/
         popd
 
         Rscript hERG_fitting.R -d $params.drugName -c $task.cpus -i $sample -l $params.population -t $params.accuracy >\
