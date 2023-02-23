@@ -62,6 +62,20 @@ process parallel {
         """
 }
 
+process err {
+    queue 'default'
+    container "$params.azureRegistryServer/default/ubuntu:latest"
+
+    input:
+        val msg
+
+    script:
+        """
+        echo $msg
+        exit 1
+        """
+}
+
 workflow {
     // Validate cpusPerSample is a factor of 80
     def factorsOf80 = [0, 1, 2, 4, 5, 8, 10, 16, 20, 40, 80]
@@ -73,7 +87,7 @@ workflow {
                 prerequisites()
             }
             else {
-                throw new Exception("Invalid input: if startSampleNumber is 0 endSampleNumber needs to be 0.")
+                err("Invalid input: if startSampleNumber is 0 endSampleNumber needs to be 0.")
             }
         }
         
@@ -85,12 +99,12 @@ workflow {
                     parallel(dir, Channel.from(params.startSampleNumber..params.endSampleNumber)) | view
                 }
                 else {
-                    throw new Exception("Invalid input: startSampleNumber needs to be <= endSampleNumber.")
+                    err("Invalid input: startSampleNumber needs to be <= endSampleNumber.")
                 }
             }
         }
     }
     else {
-        throw new Exception("Invalid input: cpusPerSample needs to be a factor of 80.")
+        err("Invalid input: cpusPerSample needs to be a factor of 80.")
     }
 }
