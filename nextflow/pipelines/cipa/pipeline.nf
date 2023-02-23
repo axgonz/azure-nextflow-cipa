@@ -81,7 +81,7 @@ workflow {
     if(params.cpusPerSample < 1) {
         err("Invalid input: cpusPerSample must be => 1.")
     }
-    if (factorsOf80.contains(params.cpusPerSample % 80)) {
+    if (!factorsOf80.contains(params.cpusPerSample % 80)) {
         err("Invalid input: cpusPerSample must be a factor of 80.")
     }
 
