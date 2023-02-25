@@ -8,11 +8,18 @@ GET https://{{az_funcName}}.azurewebsites.net/api/nxfutil HTTP/1.1
 
 ###
 
-GET https://{{az_funcName}}.azurewebsites.net/api/nxfutil_status HTTP/1.1
+POST https://{{az_funcName}}.azurewebsites.net/api/nxfutil/status HTTP/1.1
+content-type: application/json
+
+{
+    "summary": true,
+    "message_count": 32,
+    "dequeue": false
+}
 
 ### bepridil
 
-POST https://{{az_funcName}}.azurewebsites.net/api/nxfutil HTTP/1.1
+POST https://{{az_funcName}}.azurewebsites.net/api/nxfutil/dispatch HTTP/1.1
 content-type: application/json
 
 {
@@ -24,7 +31,7 @@ content-type: application/json
 
 ### chlorpromazine
 
-POST https://{{az_funcName}}.azurewebsites.net/api/nxfutil HTTP/1.1
+POST https://{{az_funcName}}.azurewebsites.net/api/nxfutil/dispatch HTTP/1.1
 content-type: application/json
 
 {
